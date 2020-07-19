@@ -198,7 +198,7 @@ std::vector<std::pair<int, int>> Map::able_positions(int x, int y) {
 				}
 			}
 			if (y - 2 >= 0 && data_color[x][y - 1] == white) {
-				if (x + 1 <= HEIGHT && data_color[x + 1][y - 2] != data_color[x][y]) {
+				if (x + 1 < HEIGHT && data_color[x + 1][y - 2] != data_color[x][y]) {
 					res.push_back({x + 1, y - 2});
 				}
 				if (x - 1 >= 0 && data_color[x - 1][y - 2] != data_color[x][y]) {
