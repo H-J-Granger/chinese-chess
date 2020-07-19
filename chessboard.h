@@ -302,13 +302,13 @@ std::vector<std::pair<int, int>> Map::able_positions(int x, int y) {
 			if (x + 2 < HEIGHT && y + 2 < WIDTH && data_type[x + 1][y + 1] == null && data_type[x + 2][y + 2] != data_type[x][y] && x != 4) {
 				res.push_back({x + 2, y + 2});
 			}
-			if (x + 2 < HEIGHT && y - 2 < WIDTH && data_type[x + 1][y - 1] == null && data_type[x + 2][y - 2] != data_type[x][y] && x != 4) {
+			if (x + 2 < HEIGHT && y - 2 >= 0 && data_type[x + 1][y - 1] == null && data_type[x + 2][y - 2] != data_type[x][y] && x != 4) {
 				res.push_back({x + 2, y - 2});
 			}
-			if (x - 2 < HEIGHT && y + 2 < WIDTH && data_type[x - 1][y + 1] == null && data_type[x - 2][y + 2] != data_type[x][y] && x != 5) {
+			if (x - 2 >= 0 && y + 2 < WIDTH && data_type[x - 1][y + 1] == null && data_type[x - 2][y + 2] != data_type[x][y] && x != 5) {
 				res.push_back({x - 2, y + 2});
 			}
-			if (x - 2 < HEIGHT && y - 2 < WIDTH && data_type[x - 1][y - 1] == null && data_type[x - 2][y - 2] != data_type[x][y] && x != 5) {
+			if (x - 2 >= 0 && y - 2 >= 0 && data_type[x - 1][y - 1] == null && data_type[x - 2][y - 2] != data_type[x][y] && x != 5) {
 				res.push_back({x - 2, y - 2});
 			}
 			break;
