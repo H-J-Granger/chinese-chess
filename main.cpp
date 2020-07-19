@@ -8,7 +8,7 @@ void two_palyers() {
 	using std::scanf;
 	
 	map.print();
-	puts("�̷����ߣ��췽����");
+	puts("绿方先走，红方后走");
 	sleep(1000);
 	bool now = 0;
 	
@@ -20,13 +20,13 @@ void two_palyers() {
 			do {
 				clear();
 				map.print();
-				puts("�췽ѡ��Ҫ�ƶ������ӣ�");
+				puts("红方选择要移动的棋子：");
 				scanf("%d %d", &fromx, &fromy);
 				fromx--; fromy--;
 			} while (fromx >= HEIGHT || fromx < 0 || fromy >= WIDTH || fromy < 0 || map.data_color[fromx][fromy] != red);
 			map.print(map.able_positions(fromx, fromy));
 			while (true) {
-				puts("�췽ѡ��Ҫ�ƶ�����λ�ã�");
+				puts("红方选择要移动到的位置：");
 				scanf("%d %d", &tox, &toy);
 				tox--; toy--;
 				try {
@@ -41,13 +41,13 @@ void two_palyers() {
 			do {
 				clear();
 				map.print();
-				puts("�̷�ѡ��Ҫ�ƶ������ӣ�");
+				puts("绿方选择要移动的棋子：");
 				scanf("%d %d", &fromx, &fromy);
 				fromx--; fromy--;
 			} while (fromx >= HEIGHT || fromx < 0 || fromy >= WIDTH || fromy < 0 || map.data_color[fromx][fromy] != green);
 			map.print(map.able_positions(fromx, fromy));
 			while (true) {
-				puts("�̷�ѡ��Ҫ�ƶ�����λ�ã�");
+				puts("绿方选择要移动到的位置：");
 				scanf("%d %d", &tox, &toy);
 				tox--; toy--;
 				try {
@@ -62,7 +62,7 @@ void two_palyers() {
 	}
 	clear();
 	map.print();
-	puts(map.status() == 1 ? "�췽��ʤ" : "�̷���ʤ");
+	puts(map.status() == 1 ? "红方获胜" : "绿方获胜");
 }
 
 int main(int argc, char** argv) {
