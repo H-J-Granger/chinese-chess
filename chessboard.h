@@ -91,11 +91,11 @@ struct Map {
 		for (auto now : able) {
 			//std::printf("(%d, %d) ", now.first, now.second);
 			if (now.first == tox && now.second == toy) {
+				stack.push((Map::Move){fromx, fromy, tox, toy, data_type[tox][toy], data_color[tox][toy]});
 				data_type[tox][toy] = data_type[fromx][fromy];
 				data_color[tox][toy] = data_color[fromx][fromy];
 				data_type[fromx][fromy] = null;
 				data_color[fromx][fromy] = white;
-				stack.push((Map::Move){fromx, fromy, tox, toy, data_type[tox][toy], data_color[tox][toy]});
 				return;
 			}
 		}
