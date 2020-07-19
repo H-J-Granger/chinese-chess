@@ -189,35 +189,35 @@ std::vector<std::pair<int, int>> Map::able_positions(int x, int y) {
 			break;
 		}
 		case ma: {
-			if (data_color[x][y + 1] == white) {
-				if (data_color[x + 1][y + 2] != data_color[x][y]) {
+			if (y + 2 < WIDTH && data_color[x][y + 1] == white) {
+				if (x + 1 < HEIGHT && data_color[x + 1][y + 2] != data_color[x][y]) {
 					res.push_back({x + 1, y + 2});
 				}
-				if (data_color[x - 1][y + 2] != data_color[x][y]) {
+				if (x - 1 >= 0 && data_color[x - 1][y + 2] != data_color[x][y]) {
 					res.push_back({x - 1, y + 2});
 				}
 			}
-			if (data_color[x][y - 1] == white) {
-				if (data_color[x + 1][y - 2] != data_color[x][y]) {
+			if (y - 2 >= 0 && data_color[x][y - 1] == white) {
+				if (x + 1 <= HEIGHT && data_color[x + 1][y - 2] != data_color[x][y]) {
 					res.push_back({x + 1, y - 2});
 				}
-				if (data_color[x - 1][y - 2] != data_color[x][y]) {
+				if (x - 1 >= 0 && data_color[x - 1][y - 2] != data_color[x][y]) {
 					res.push_back({x - 1, y - 2});
 				}
 			}
-			if (data_color[x + 1][y] == white) {
-				if (data_color[x + 2][y + 1] != data_color[x][y]) {
+			if (x + 2 < HEIGHT && data_color[x + 1][y] == white) {
+				if (y + 1 < WIDTH && data_color[x + 2][y + 1] != data_color[x][y]) {
 					res.push_back({x + 2, y + 1});
 				}
-				if (data_color[x + 2][y - 1] != data_color[x][y]) {
+				if (y - 1 >= 0 && data_color[x + 2][y - 1] != data_color[x][y]) {
 					res.push_back({x + 2, y - 1});
 				}
 			}
-			if (data_color[x - 1][y] == white) {
-				if (data_color[x - 2][y + 1] != data_color[x][y]) {
+			if (x - 2 >= 0 && data_color[x - 1][y] == white) {
+				if (y + 1 < WIDTH && data_color[x - 2][y + 1] != data_color[x][y]) {
 					res.push_back({x - 2, y + 1});
 				}
-				if (data_color[x - 2][y - 1] != data_color[x][y]) {
+				if (y - 1 >= 0 && data_color[x - 2][y - 1] != data_color[x][y]) {
 					res.push_back({x - 2, y - 1});
 				}
 			}
