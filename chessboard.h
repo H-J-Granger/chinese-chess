@@ -51,6 +51,11 @@ struct Map {
 			}
 			return data.back();
 		}
+		Move(int fx=0,int fy=0,int tx=0,int ty=0,chess_type et=null,chess_color ec=white){
+			fromx=fx;fromy=fy;
+			tox=tx;toy=ty;
+			eaten_type=et;eaten_color=ec;
+		}
 	} stack;
 	
 	chess_type data_type[HEIGHT][WIDTH] = {
@@ -91,7 +96,7 @@ struct Map {
 		for (auto now : able) {
 			//std::printf("(%d, %d) ", now.first, now.second);
 			if (now.first == tox && now.second == toy) {
-				stack.push((Map::Move){fromx, fromy, tox, toy, data_type[tox][toy], data_color[tox][toy]});
+				stack.push(Map::Move(fromx, fromy, tox, toy, data_type[tox][toy], data_color[tox][toy]));
 				data_type[tox][toy] = data_type[fromx][fromy];
 				data_color[tox][toy] = data_color[fromx][fromy];
 				data_type[fromx][fromy] = null;
