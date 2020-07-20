@@ -32,6 +32,11 @@ struct Map {
 		int tox, toy;
 		chess_type eaten_type;
 		chess_color eaten_color;
+		Move(int fx = 0, int fy = 0, int tx = 0, int ty = 0, chess_type et = null, chess_color ec = white) {
+			fromx = fx; fromy = fy;
+			tox = tx; toy = ty;
+			eaten_type = et; eaten_color = ec;
+		}
 	};
 	
 	struct Stack {
@@ -50,11 +55,6 @@ struct Map {
 				throw "size error!";
 			}
 			return data.back();
-		}
-		Move(int fx=0,int fy=0,int tx=0,int ty=0,chess_type et=null,chess_color ec=white){
-			fromx=fx;fromy=fy;
-			tox=tx;toy=ty;
-			eaten_type=et;eaten_color=ec;
 		}
 	} stack;
 	
@@ -130,12 +130,8 @@ struct Map {
 				}
 			}
 		}
-		if (!tag[0]) {
-			return 1;
-		}
-		if (!tag[1]) {
-			return -1;
-		}
+		if (!tag[0]) { return 1; }
+		if (!tag[1]) { return -1; }
 		return 0;
 	}
 } map;
@@ -147,9 +143,7 @@ std::vector<std::pair<int, int>> Map::able_positions(int x, int y) {
 		return res;
 	}
 	switch (data_type[x][y]) {
-		case null: {
-			break;
-		}
+		case null: { break; }
 		case ju: {
 			for (int i = x + 1; i < HEIGHT; ++i) {
 				if (data_color[i][y] == data_color[x][y]) {
@@ -186,9 +180,7 @@ std::vector<std::pair<int, int>> Map::able_positions(int x, int y) {
 					break;
 				} else {
 					res.push_back({x, i});
-					if (data_color[x][i] != white) {
-						break;
-					}
+					if (data_color[x][i] != white) { break; }
 				}
 			}
 			break;
@@ -444,45 +436,24 @@ void Map::print(std::vector<std::pair<int, int>> V) {
 			}
 			
 			switch (data_type[i][j]) {
-				case ju: {
-					printf("车");
-					break;
-				}
-				case ma: {
-					printf("马");
-					break;
-				}
-				case pao: {
-					printf("炮");
-					break;
-				}
-				case shi: {
-					printf("士");
-					break;
-				}
-				case jiang: {
-					printf("将");
-					break;
-				}
-				case zu: {
-					printf("卒");
-					break;
-				}
-				case null: {
-					printf("  ");
-					break;
-				}
-				case xiang: {
-					printf("象");
-					break;
-				}
+				case ju: { printf("车"); break; }
+				case ma: { printf("马"); break; }
+				case pao: { printf("炮"); break; }
+				case shi: { printf("士"); break; }
+				case jiang: { printf("将"); break; }
+				case zu: { printf("卒"); break; }
+				case null: { printf("  "); break; }
+				case xiang: { printf("象"); break; }
 			}
 			console.UnSetColor();
 			printf("|");
 		}
 		puts("");
-		if(i+1==HEIGHT/2) puts("  ============================");
-		else puts("  ----------------------------");
+		if (i + 1 == HEIGHT / 2) {
+			puts("  ============================");
+		} else {
+			puts("  ----------------------------");
+		}
 	}
 	console.UnSetColor();
 }
