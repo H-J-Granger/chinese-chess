@@ -82,16 +82,13 @@ void one_palyer() {
 	bool now = 0;
 	
 	while (!map.status()) {
-		clear();
 		now ^= 1;
 		int fromx, fromy, tox, toy;
 		if (!now) {
 			map.move(robot_choose());
-			clear();
 			map.print();
 		} else {
 			do {
-				clear();
 				map.print();
 				puts("绿方选择要移动的棋子：");
 				scanf("%d %d", &fromx, &fromy);
@@ -112,7 +109,6 @@ void one_palyer() {
 			map.print();
 		}
 	}
-	clear();
 	map.print();
 	puts(map.status() == 1 ? "红方获胜" : "绿方获胜");
 }
