@@ -135,7 +135,7 @@ Map::Move robot_choose(){
 	// printf("%d\n",map.data_color[0][7]);
 	sort(V.begin(),V.end());
 	int maxn=-2.1e9,val;
-	Map::Move max_step;
+	Map::Move max_step==V[0].mov;
 	for (int i=0;i<V.size();i++){
 		// printf("%d %d %d %d %d\n",V[i].mov.fromx,V[i].mov.fromy,V[i].mov.tox,V[i].mov.toy,map.data_color[0][7]);
 		map.move(V[i].mov);
