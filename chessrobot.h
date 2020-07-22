@@ -84,9 +84,9 @@ bool operator < (Step x, Step y) {
 }
 
 int Min_Max_Search(int dep = 0){
-	if(map.status() == -1) {return -2.1e9;}
-	if(map.status() == 1) {return 2.1e9;}
-	if(dep >= max_dep) {return expected_value(map);}
+	if (map.status() == -1) {return -2.1e9;}
+	if (map.status() == 1) {return 2.1e9;}
+	if (dep >= max_dep) {return expected_value(map);}
 	std::vector<Step> V;
 	for (int i = 0; i < HEIGHT; i++) {
 		for (int j = 0; j < WIDTH; j++) {
@@ -104,46 +104,49 @@ int Min_Max_Search(int dep = 0){
 	}
 	std::sort(V.begin(), V.end());
 	int m = std::min((int)V.size(), max_dep - dep);
-	if(!(dep & 1)) {
-		V.erase(V.begin(),V.end()-m);
-	} else V.erase(V.begin()+m,V.end());
-	int maxn=-2.1e9,minn=2.1e9;
-	for (auto step:V){
-		map.move(step.mov);
-		int val=Min_Max_Search(dep+1);
-		map.undo();
-		maxn=max(maxn,val);
-		minn=min(minn,val);
+	if (!(dep & 1)) {
+		V.erase(V.begin(), V.end() - m);
+	} else {
+		V.erase(V.begin() + m, V.end());
 	}
-	return (!(dep&1))?minn:maxn;
+	int maxn = -2.1e9, minn = 2.1e9;
+	for (auto step : V) {
+		map.move(step.mov);
+		int val=Min_Max_Search(dep + 1);
+		map.undo();
+		maxn=std::max(maxn,val);
+		minn=std::min(minn,val);
+	}
+	return dep & 1 ? maxn : minn;
 }
 Map::Move robot_choose(){
-	vector<Step> V;
+	std::vector<Step> V;
 	for (int i=0;i<HEIGHT;i++){
 		for (int j=0;j<WIDTH;j++){
-			if(map.data_color[i][j]!=red) continue;
-			vector<pair<int,int> > S=map.able_positions(i,j);
-			for (auto k:S){
-				map.move(i,j,k.first,k.second);
-				int val=expected_value(map);
+			if (map.data_color[i][j] != red) {continue;}
+			std::vector<std::pair<int,int> > S = map.able_positions(i, j);
+			for (auto k : S){
+				map.move(i, j, k.first, k.second);
+				int val = expected_value(map);
 				map.undo();
-				V.push_back((Step){Map::Move(i,j,k.first,k.second,map.data_type[k.first][k.second],map.data_color[k.first][k.second]),val});
+				V.push_back((Step){Map::Move(i, j, k.first, k.second, map.data_type[k.first][k.second], map.data_color[k.first][k.second]), val});
 			}
 		}
 	}
 	// puts("Debug");
 	// printf("%d\n",map.data_color[0][7]);
-	sort(V.begin(),V.end());
-	int maxn=-2.1e9,val;
-	Map::Move max_step==V[0].mov;
-	for (int i=0;i<V.size();i++){
+	sort(V.begin(), V.end());
+	int maxn = -2.1e9, val;
+	Map::Move max_step = V[0].mov;
+	for (int i = 0; i < V.size(); i++){
 		// printf("%d %d %d %d %d\n",V[i].mov.fromx,V[i].mov.fromy,V[i].mov.tox,V[i].mov.toy,map.data_color[0][7]);
 		map.move(V[i].mov);
+		val = Min_Max_Search();
 		// puts("ok");
-		if((val=Min_Max_Search())>maxn){
-			maxn=val;
-			max_step=V[i].mov;
-		} 
+		if(val > maxn){
+			maxn = val;
+			max_step = V[i].mov;
+		}
 		map.undo();
 	}   
 	return max_step;
